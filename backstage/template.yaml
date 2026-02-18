@@ -53,6 +53,6 @@ spec:
       name: Publishing to GitHub
       action: publish:github
       input:
-        repoUrl: "github.com?owner=dirkporter&repo=${{ parameters.vmName }}-config"
+        repoUrl: "github.com?owner=dirkporter-labs&repo=${{ parameters.vmName }}-config"
         repoVisibility: public
         defaultBranch: main
