@@ -54,5 +54,5 @@ spec:
       action: publish:github
       input:
         repoUrl: "github.com?owner=dirkporter&repo=rh-dev-suite-vm-template"
-        branchName: main
+       # branchName: main
         sourcePath: deploy/${{ parameters.targetNamespace }}/${{ parameters.vmName }}
