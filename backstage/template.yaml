@@ -46,8 +46,8 @@ spec:
           vmName: ${{ parameters.vmName }}
           # Logic to translate T-shirt size into numbers
           namespace: ${{ parameters.targetNamespace }}
-          cpu: ${{ '1' if parameters.size == 'Small' else '2' if parameters.size == 'Medium' else '4' }}
-          memory: ${{ '2Gi' if parameters.size == 'Small' else '4Gi' if parameters.size == 'Medium' else '8Gi' }}
+          cpu: ${{ { 'Small': '1', 'Medium': '2', 'Large': '4' }[parameters.size] }}
+          memory: ${{ { 'Small': '2Gi', 'Medium': '4Gi', 'Large': '8Gi' }[parameters.size] }}
 
     - id: publish
       name: Publishing to GitHub
@@ -56,3 +56,10 @@ spec:
         repoUrl: "github.com?owner=dirkporter-labs&repo=${{ parameters.vmName }}-config"
         repoVisibility: public
         defaultBranch: main
+    
+    - id: register
+      name: Registering in Catalog
+      action: catalog:register
+      input:
+        # Use the variable from the template parameters
+        repoContentsUrl: "https://github.com/dirkporter-labs/${{ parameters.vmName }}-config/blob/main/catalog-info.yaml"
