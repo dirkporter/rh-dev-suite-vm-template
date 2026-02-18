@@ -46,9 +46,8 @@ spec:
           vmName: ${{ parameters.vmName }}
           # Logic to translate T-shirt size into numbers
           namespace: ${{ parameters.targetNamespace }}
-          cpu: ${{ { 'Small': '1', 'Medium': '2', 'Large': '4' }[parameters.size] }}
-          memory: ${{ { 'Small': '2Gi', 'Medium': '4Gi', 'Large': '8Gi' }[parameters.size] }}
-
+          cpu: "${{ { 'Small': '1', 'Medium': '2', 'Large': '4' }[parameters.size] }}"
+          memory: "${{ { 'Small': '2Gi', 'Medium': '4Gi', 'Large': '8Gi' }[parameters.size] }}"
     - id: publish
       name: Publishing to GitHub
       action: publish:github
