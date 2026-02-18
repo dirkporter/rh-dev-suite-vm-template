@@ -8,6 +8,16 @@ spec:
   owner: platform-team
   type: service
   parameters:
+    -title: VM Placement
+      properties:
+        targetNamespace:
+          type: string
+          description: Which namespace should this VM be deployed to? 
+          default: default
+          enum: 
+            - default
+            - dev-namespace
+            - prod-namespace
     - title: VM Configuration
       required:
         - vmName
