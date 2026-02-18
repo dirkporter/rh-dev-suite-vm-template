@@ -51,7 +51,7 @@ spec:
 
     - id: publish
       name: Publishing to GitHub
-      action: publish:github
+      action: publish:github:push
       input:
         repoUrl: "github.com?owner=dirkporter&repo=rh-dev-suite-vm-template"
         description: "New VM: ${{ parameters.vmName }}"
