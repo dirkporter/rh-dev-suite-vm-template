@@ -55,10 +55,4 @@ spec:
         repoUrl: "github.com?owner=dirkporter-labs&repo=${{ parameters.vmName }}-config"
         repoVisibility: public
         defaultBranch: main
-    
-    - id: register
-      name: Registering in Catalog
-      action: catalog:register
-      input:
-        # Use the variable from the template parameters
-        repoContentsUrl: "https://github.com/dirkporter-labs/${{ parameters.vmName }}-config/blob/main/catalog-info.yaml"
+
