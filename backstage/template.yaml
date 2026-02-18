@@ -43,3 +43,4 @@ spec:
       input:
         allowedHosts: ['github.com']
         repoUrl: "github.com?owner=YOUR_ORG&repo=${{ parameters.vmName }}-config"
+        sourcePath: 'deploy' 
