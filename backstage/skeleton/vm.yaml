@@ -36,6 +36,7 @@ spec:
       volumes:
         - name: containerdisk
           dataVolume:
+            name: ${{ values.vmName  }}-dv
             options:
               sourceRef: 
                 kind: DataSource
