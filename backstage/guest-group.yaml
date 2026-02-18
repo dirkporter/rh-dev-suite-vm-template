@@ -1,0 +1,8 @@
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: guest
+  description: "Default guest group for the lab"
+spec:
+  type: team
+  children: []
