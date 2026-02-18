@@ -47,10 +47,10 @@ spec:
           cpu: ${{ '1' if parameters.size == 'Small' else '2' if parameters.size == 'Medium' else '4' }}
           memory: ${{ '2Gi' if parameters.size == 'Small' else '4Gi' if parameters.size == 'Medium' else '8Gi' }}
 
-#    - id: publish
-#      name: Publishing to GitHub
-#      action: publish:github
-#      input:
-#        allowedHosts: ['github.com']
-#        repoUrl: "github.com?owner=YOUR_ORG&repo=${{ parameters.vmName }}-config"
-#        sourcePath: 'deploy' 
+    - id: publish
+      name: Publishing to GitHub
+      action: publish:github
+      input:
+        allowedHosts: ['github.com']
+        repoUrl: "github.com?owner=YOUR_ORG&repo=${{ parameters.vmName }}-config"
+        sourcePath: 'deploy' 
