@@ -9,3 +9,7 @@ spec:
   type: service
   lifecycle: production
   owner: user:guest
+links:
+    - url: https://${{ values.vmName }}-route-default.apps.your-cluster.com
+      title: Open Web Page
+      icon: dashboard
