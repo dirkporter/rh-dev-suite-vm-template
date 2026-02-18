@@ -11,6 +11,7 @@ spec:
     - title: VM Placement
       properties:
         targetNamespace:
+          title: Target Namespace
           type: string
           description: Which namespace should this VM be deployed to? 
           default: default
@@ -51,6 +52,6 @@ spec:
       name: Publishing to GitHub
       action: publish:github
       input:
-        allowedHosts: ['github.com']
+  #      allowedHosts: ['github.com']
         repoUrl: "github.com?owner=YOUR_ORG&repo=${{ parameters.vmName }}-config"
         sourcePath: 'deploy' 
