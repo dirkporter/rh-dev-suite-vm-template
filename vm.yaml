@@ -1,0 +1,47 @@
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  name: ${{ values.vmName }}
+  labels:
+    app: ${{ values.vmName }}
+spec:
+  running: true
+  template:
+    metadata:
+      labels:
+        kubevirt.io/vm: ${{ values.vmName }}
+        app: ${{ values.vmName }}
+    spec:
+      domain:
+        resources:
+          requests:
+            cpu: ${{ values.cpu }}
+            memory: ${{ values.memory }}
+          limits:
+            cpu: ${{ values.cpu }}
+            memory: ${{ values.memory }}
+        devices:
+          disks:
+            - diskbus: virtio
+              name: containerdisk
+            - diskbus: virtio
+              name: cloudinitdisk
+          interfaces:
+            - masquerade: {}
+              name: default
+      networks:
+        - name: default
+          pod: {}
+      volumes:
+        - containerDisk:
+            image: quay.io/containerdisks/fedora:latest
+          name: containerdisk
+        - cloudInitNoCloud:
+            userData: |
+              #cloud-config
+              runcmd:
+                - dnf install -y httpd
+                - systemctl enable --now httpd
+                - echo "<html><body style='font-family:sans-serif; text-align:center; padding-top:50px;'><h1>VM provisioned using Red Hat Advanced Developer Suite</h1><p>Resources: ${{ values.cpu }} CPU | ${{ values.memory }} RAM</p></body></html>" > /var/www/html/index.html
+          name: cloudinitdisk
+

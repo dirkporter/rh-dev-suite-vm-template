@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: ${{ values.vmName | dump }}
+  annotations:
+    argocd/app-name: 'vm-gitops-delivery'
+    kubernetes.io/instance: ${{ values.vmName | dump }}
+spec:
+  type: service
+  lifecycle: production
+  owner: user:guest
