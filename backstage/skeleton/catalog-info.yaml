@@ -1,15 +1,15 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: ${{ values.vmName | dump }}
+  name: ${{ values.vmName }}
   annotations:
-    argocd/app-name: 'vm-gitops-delivery'
-    kubernetes.io/instance: ${{ values.vmName | dump }}
+    argocd/app-name: ${{ values.vmName }}
+    kubernetes.io/instance: ${{ values.vmName }}
 spec:
   type: service
   lifecycle: production
   owner: user:guest
 links:
-    - url: https://${{ values.vmName }}-route-default.apps.your-cluster.com
-      title: Open Web Page
-      icon: dashboard
+  - url: https://${{ values.vmName }}-route-default.apps.your-cluster.com
+    title: Open Web Page
+    icon: dashboard
