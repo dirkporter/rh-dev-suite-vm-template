@@ -16,11 +16,11 @@ spec:
       domain:
         resources:
           requests:
-            cpu: ${{ values.cpu }}
-            memory: ${{ values.memory }}
+            cpu: ${{ values.cpu | dump }}
+            memory: ${{ values.memory | dump }}
           limits:
-            cpu: ${{ values.cpu }}
-            memory: ${{ values.memory }}
+            cpu: ${{ values.cpu | dump }}
+            memory: ${{ values.memory | dump }}
         devices:
           disks:
             - diskbus: virtio
