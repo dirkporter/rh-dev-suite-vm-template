@@ -45,9 +45,23 @@ spec:
         - cloudInitNoCloud:
             userData: |
               #cloud-config
+              user: dirk
+              password: password:redhatocp
+              chpasswd: { expire: False }
+              sudo: [ "ALL=(ALL) NOPASSWD:ALL" ]
+              packages:
+                - httpd
+              write_files:
+                - content: |
+                    <html>
+                    <body>
+                      <h1>You are now viewing Dirk's Golden Image</h1>
+                      <p>Hosted on <strong>OpenShift Virtualization</strong> via Cloud-Init</p>
+                    </body>
+                    </html>
+                  path: /var/www/html/index.html
               runcmd:
-                - dnf install -y httpd
-                - systemctl enable --now httpd
-                - echo "<html><body style='font-family:sans-serif; text-align:center; padding-top:50px;'><h1>VM provisioned using Red Hat Advanced Developer Suite</h1><p>Resources: ${{ values.cpu }} CPU | ${{ values.memory }} RAM</p></body></html>" > /var/www/html/index.html
+                - [ systemctl, enable, --now, httpd ]
+     
           name: cloudinitdisk
 
