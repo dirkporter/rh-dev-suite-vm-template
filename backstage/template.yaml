@@ -5,7 +5,7 @@ metadata:
   title: Order Fedora Web Server
   description: Self-service VM provisioning with T-shirt sizing.
 spec:
-  owner: platform-team
+  owner: guest
   type: service
   parameters:
     - title: VM Placement
