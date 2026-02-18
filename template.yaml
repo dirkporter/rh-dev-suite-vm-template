@@ -1,0 +1,45 @@
+apiVersion: scaffold.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: order-fedora-vm
+  title: Order Fedora Web Server
+  description: Self-service VM provisioning with T-shirt sizing.
+spec:
+  owner: platform-team
+  type: service
+  parameters:
+    - title: VM Configuration
+      required:
+        - vmName
+        - size
+      properties:
+        vmName:
+          title: VM Name
+          type: string
+          default: fedora-web-server
+        size:
+          title: VM Size
+          type: string
+          description: Choose the resources for your VM
+          enum: ["Small", "Medium", "Large"]
+          default: "Small"
+          # This maps the "Size" name to actual values for the skeleton
+          enumNames: ["Small (1 CPU, 2Gi RAM)", "Medium (2 CPU, 4Gi RAM)", "Large (4 CPU, 8Gi RAM)"]
+  steps:
+    - id: fetch
+      name: Generating Manifests
+      action: fetch:template
+      input:
+        url: ./skeleton
+        values:
+          vmName: ${{ parameters.vmName }}
+          # Logic to translate T-shirt size into numbers
+          cpu: ${{ '1' if parameters.size == 'Small' else '2' if parameters.size == 'Medium' else '4' }}
+          memory: ${{ '2Gi' if parameters.size == 'Small' else '4Gi' if parameters.size == 'Medium' else '8Gi' }}
+
+    - id: publish
+      name: Publishing to GitHub
+      action: publish:github
+      input:
+        allowedHosts: ['github.com']
+        repoUrl: "github.com?owner=YOUR_ORG&repo=${{ parameters.vmName }}-config"
